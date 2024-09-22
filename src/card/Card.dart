@@ -1,36 +1,50 @@
 import 'dart:math';
 
-enum Suit { heart, diamond, spade, club }
+enum Suit { Heart, Diamond, Spade, Club }
+enum FaceCard { Jack, Queen, King, Ace }
 
 class Card {
-  Map<Suit, int> card;
+  int cardNumber;
+  Suit cardSuit;
+  FaceCard? faceValue;
   
-  Card(this.card) {
-    card = this.card;
+  Card(this.cardNumber, this.cardSuit) {
+    cardNumber = this.cardNumber;
+    cardSuit = this.cardSuit;
   }
 
-  Suit determineSuit(){
-    // Determine a random suit
-    
+  // Generate suit for an individual card
+  void determineSuit(){
     var random = Random();
     var suit = random.nextInt(4);
 
     if (suit == 0) {
-      return Suit.heart;
+      cardSuit = Suit.Heart;
     } else if (suit == 1) {
-      return Suit.diamond;
+      cardSuit = Suit.Diamond;
     } else if (suit == 2) {
-      return Suit.spade;
+      cardSuit = Suit.Spade;
     } else if (suit == 3) {
-      return Suit.club;
+      cardSuit = Suit.Club;
     }
-
-    throw 'Error! Suit cannot be null';
   }
 
-  int drawCard() {
-    var cardNumber = Random().nextInt(13);
-    return cardNumber;
+  // Generate the cards value as a number
+  void cardValue(){
+    var random = Random();
+    cardNumber = random.nextInt(13) + 1;
+  }
+
+  void convertToFaceCard(){
+    if (cardNumber == 0) {
+      faceValue = FaceCard.Ace;
+    } else if (cardNumber == 11) {
+      faceValue = FaceCard.Jack;
+    } else if (cardNumber == 12) {
+      faceValue = FaceCard.Queen;
+    } else if (cardNumber == 13) {
+      faceValue = FaceCard.King;
+    }
   }
 
 }
