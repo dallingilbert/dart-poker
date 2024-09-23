@@ -4,17 +4,25 @@ enum Suit { Heart, Diamond, Spade, Club }
 enum FaceCard { Jack, Queen, King, Ace }
 
 class Card {
-  int cardNumber;
-  Suit cardSuit;
+  int? cardNumber;
+  Suit? cardSuit;
   FaceCard? faceValue;
+
+  // Named constructor to generate a random card
+  Card.random(){
+    assignSuit();
+    cardValue();
+    convertToFaceCard();
+  }
   
   Card(this.cardNumber, this.cardSuit) {
     cardNumber = this.cardNumber;
     cardSuit = this.cardSuit;
+    convertToFaceCard();
   }
 
   // Generate suit for an individual card
-  void determineSuit(){
+  void assignSuit(){
     var random = Random();
     var suit = random.nextInt(4);
 
@@ -35,8 +43,14 @@ class Card {
     cardNumber = random.nextInt(13) + 1;
   }
 
+  // To assist with defining Jack, Queen, King and Ace cards
   void convertToFaceCard(){
-    if (cardNumber == 0) {
+    // If a card value is not equal to 1, or greater than 10, dont convert
+    if (cardNumber! >= 2 && cardNumber! <= 10) {
+      return;
+    }
+
+    if (cardNumber == 1) {
       faceValue = FaceCard.Ace;
     } else if (cardNumber == 11) {
       faceValue = FaceCard.Jack;

@@ -2,17 +2,17 @@ import './src/player/Player.dart';
 import './src/card/Card.dart';
 
 void main() {
-  // Instantiate player
+  // Instantiate players
   Player player1 = Player(1000, 'Saltyveins');
-  Card card = Card(4, Suit.Heart);
+  Player player2 = Player(2000, 'Salty');
 
-    // If a card value is equal to 1, or less than 11, exit
-    if (card.cardNumber == 0 || card.cardNumber >= 11) {
-      card.convertToFaceCard();
-    }
+  // Create 3 random cards and add them to player 1
+  for (int i = 0; i < 3; i++) {
+    Card card = Card.random();
+    player1.cards!.add(card);
+  }
 
-  print(card.cardNumber);
-  print(card.faceValue);
-
+  // print player1 individual cards
+  player1.cards!.forEach((card) => print(card.cardNumber));
 
 }
