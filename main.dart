@@ -1,18 +1,29 @@
 import './src/player/player.dart';
 import 'src/card/card.dart';
+import './src/game/game_logic.dart';
+import './src/house/house.dart';
+
+
+const double bigBlind = 50;
 
 void main() {
   // Instantiate players
   Player player1 = Player(1000, 'Saltyveins', []);
   Player player2 = Player(2000, 'Salty', []);
+  Player player3 = Player(3500, 'John Doe', []);
+  Player player4 = Player(4000, 'Jane', []);
 
-  // Create 3 random cards and add them to player 1
-  for (int i = 0; i < 3; i++) {
-    Card card = Card.random();
-    player1.cards.add(card);
-  }
+  House house = House();
+
+  // Instantiate game object
+  GameLogic game = GameLogic(([player1, player2, player3, player4]), house, bigBlind);
+
+  game.initPlayerRoles();
+  game.dealCardsToPlayers();
 
   // print player1 individual cards
-  player1.cards.forEach((card) => print('${card.cardNumber} + FaceValue: ${card.faceValue}'));
+  for (final player in game.playerList) {
+    print('Player: ${player.name} had ${player.cards[0]} of ${player.cards}');
+  }
 
 }
