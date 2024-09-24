@@ -16,23 +16,21 @@ class Card {
   }
   
   Card(this.cardNumber, this.cardSuit) {
-    cardNumber = this.cardNumber;
-    cardSuit = this.cardSuit;
     convertToFaceCard();
   }
 
   // Generate suit for an individual card
   void assignSuit(){
     var random = Random();
-    var suit = random.nextInt(4);
+    var number = random.nextInt(53);
 
-    if (suit == 0) {
+    if (number >= 0 && number < 13) {
       cardSuit = Suit.Heart;
-    } else if (suit == 1) {
+    } else if (number >= 13 && number < 26) {
       cardSuit = Suit.Diamond;
-    } else if (suit == 2) {
+    } else if (number >= 26 && number < 39) {
       cardSuit = Suit.Spade;
-    } else if (suit == 3) {
+    } else if (number >= 39 && number < 52) {
       cardSuit = Suit.Club;
     }
   }
@@ -40,7 +38,10 @@ class Card {
   // Generate the cards value as a number
   void cardValue(){
     var random = Random();
-    cardNumber = random.nextInt(13) + 1;
+    var number = random.nextInt(53) + 1;
+    
+    if (number % 13 == 0) cardNumber = 13;
+    else cardNumber = number % 13;
   }
 
   // To assist with defining Jack, Queen, King and Ace cards

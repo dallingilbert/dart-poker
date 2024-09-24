@@ -8,11 +8,7 @@ class Player {
   bool isSmallBlind = false;
   bool isBigBlind = false;
 
-  Player(this.funds, this.name, this.cards) {
-    funds = this.funds;
-    name = this.name;
-    cards = this.cards;
-  }
+  Player(this.funds, this.name, this.cards);
 
   // Add winnings of the pot to player account
   void addFunds(double winnings) {

@@ -13,6 +13,6 @@ void main() {
   }
 
   // print player1 individual cards
-  player1.cards.forEach((card) => print(card.cardNumber));
+  player1.cards.forEach((card) => print('${card.cardNumber} + FaceValue: ${card.faceValue}'));
 
 }
