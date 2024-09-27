@@ -18,8 +18,10 @@ void main() {
   // Instantiate game object
   GameLogic game = GameLogic(([player1, player2, player3, player4]), house, bigBlind);
 
-  game.initPlayerRoles();
-  game.dealCardsToPlayers();
+  // Set the players up with correct roles
+  game.assignDealer();
+  // game.assignBlinds();
+  game.dealCardsToPlayers(2);
 
   // print player1 individual cards
   for (final player in game.playerList) {

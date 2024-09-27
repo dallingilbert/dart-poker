@@ -7,42 +7,43 @@ class GameLogic {
   List<Player> playerList;
   House house;
   double bigBlindValue, smallBlindValue;
-  int round, playerCount;
+  int round = 0;
+  int playerCount;
+  int dealerIndex = 0;
 
   // Constructor
   GameLogic(this.playerList, this.house, this.bigBlindValue)
     : smallBlindValue = bigBlindValue / 2,
-      playerCount = playerList.length,
-      round = 0;
+      playerCount = playerList.length;
 
   // Methods
-  void initPlayerRoles() {
-      // Set our dealer to the first player in our list
-      if (round == 0) playerList.first.isDealer = true; 
-      var dealerIndex = 0;
 
+  int get dealerLocation =>  dealerIndex;
+  
+  // This function loops through our playerList
+  void assignDealer() {
       // Keep an index of the dealer and adjust the next two players in our list
-      for (int i = 0; i < playerList.length - 1; i++){
-        if (playerList[i].isDealer) {
+      for (int i = 1; i < playerCount; i++){
+        if (i == dealerIndex) {
+          playerList[i].isDealer = true;
           dealerIndex = i;
           print('This player: ${playerList[i].name} is set to the dealer!');
-          break;
         }
       }
-
-      // We have dealer index, so we know where to set our big and small blinds
-      // Before we do that, we need to check if the player index is out of bounds
-      playerList[dealerIndex + 1].isBigBlind = true;
-      playerList[dealerIndex + 2].isSmallBlind = true;
   }
 
-  void dealCardsToPlayers() {
+  void dealCardsToPlayers(int number) {
     if (playerCount == 0) throw 'Error, no players found!';
     else {
       for (final player in playerList) {
-        player.cards.add(Card.random());
+        for (int i = 0; i < number; i++) {
+          player.cards.add(Card.random());
+        }
       }
     }
   }
 
+  void assignBlinds() {
+    
+  }
 }
